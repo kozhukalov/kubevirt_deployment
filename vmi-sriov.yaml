@@ -1,0 +1,47 @@
+apiVersion: kubevirt.io/v1alpha3
+kind: VirtualMachineInstance
+metadata:
+  name: vmi-300
+  namespace: default
+  labels:
+    kubevirt.io/domain: vm
+    debugLogs: "true"
+spec:
+  tolerations:
+  - key: node.kubernetes.io/unschedulable
+    effect: NoSchedule
+    operator: Exists
+  nodeSelector: 
+    sriov: "true"
+  domain:
+    devices:
+      disks:
+      - name: containerdisk
+        disk:
+          bus: virtio
+      - name: cloudinitdisk
+        disk:
+          bus: virtio
+      interfaces:
+      - name: default
+        masquerade: {}
+      - name: sriov
+        sriov: {}
+    resources:
+      requests:
+        memory: 2G
+  networks:
+  - name: default
+    pod: {}
+  - name: sriov
+    multus:
+      networkName: default/sriov
+  volumes:
+    - name: containerdisk
+      containerDisk:
+        image: kubevirt73/xenial:latest
+    - name: cloudinitdisk
+      cloudInitNoCloud:
+        userData: |
+          #!/bin/bash
+          echo "fedora" |passwd fedora --stdin
