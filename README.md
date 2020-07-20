@@ -41,6 +41,11 @@ kubectl apply -f sriovdp.yaml
 
 # Deploy CNI plugins
 ## Multus
+Install Multus CRD
+```
+kubectl apply -f multus-crd.yaml
+```
+
 Multus plugin requires admin kubeconfig. To generate it use this
 ```
 # requires kubectl installed
