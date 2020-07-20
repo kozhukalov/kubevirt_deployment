@@ -16,7 +16,7 @@ metadata:
 data:
   storageClassMap: |
     local-dirs:
-       hostDir: /var/lib/local-dirs
+       hostDir: /var/lib/local-mount-points
        mountDir: /var/lib/local-dirs
        volumeMode: Filesystem
        fsType: ext4
@@ -118,4 +118,4 @@ spec:
             path: /dev
         - name: local-dirs
           hostPath:
-            path: /var/lib/local-dirs
+            path: /var/lib/local-mount-points
