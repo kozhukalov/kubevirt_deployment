@@ -4,29 +4,42 @@ kind: ConfigMap
 metadata:
   name: sriovdp-config
   namespace: kube-system
+
 data:
+  # you have either specify the pci address range that corresponds to your 
+  # hardware configuration or not set pci address range at all
   config.json: |
     {
-        "resourceList": [{
-                "resourceName": "intel_sriov_netdevice",
-                "selectors": {
-                    "vendors": ["8086"],
-                    "devices": ["154c"],
-                    "drivers": ["i40evf"],
-                    "pfNames": ["ens2"],
-                    "pciAddresses": [
-                      "0000:01:11.0", 
-                      "0000:01:11.1", 
-                      "0000:01:11.2", 
-                      "0000:01:11.3", 
-                      "0000:01:11.4", 
-                      "0000:01:11.5", 
-                      "0000:01:11.6", 
-                      "0000:01:11.7" 
-                    ]
-                }
-            }
-        ]
+      "resourceList": [
+        {
+          "resourceName": "intel_sriov_netdevice_ens1",
+          "selectors": {
+            "vendors": ["8086"],
+            "devices": ["154c"],
+            "drivers": ["i40evf"],
+            "pfNames": ["ens1"]
+          }
+        },
+        {
+          "resourceName": "intel_sriov_netdevice_ens2",
+          "selectors": {
+            "vendors": ["8086"],
+            "devices": ["154c"],
+            "drivers": ["i40evf"],
+            "pfNames": ["ens2"],
+            "pciAddresses": [
+              "0000:01:11.0", 
+              "0000:01:11.1", 
+              "0000:01:11.2", 
+              "0000:01:11.3", 
+              "0000:01:11.4", 
+              "0000:01:11.5", 
+              "0000:01:11.6", 
+              "0000:01:11.7" 
+            ]
+          }
+        }
+      ]
     }
 
 ---

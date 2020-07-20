@@ -25,7 +25,9 @@ spec:
       interfaces:
       - name: default
         masquerade: {}
-      - name: sriov
+      - name: sriov-ens1
+        sriov: {}
+      - name: sriov-ens2
         sriov: {}
     resources:
       requests:
@@ -33,9 +35,12 @@ spec:
   networks:
   - name: default
     pod: {}
-  - name: sriov
+  - name: sriov-ens1
     multus:
-      networkName: default/sriov
+      networkName: default/sriov-ens1
+  - name: sriov-ens2
+    multus:
+      networkName: default/sriov-ens2
   volumes:
     - name: containerdisk
       containerDisk:

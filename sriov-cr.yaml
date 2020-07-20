@@ -1,10 +1,36 @@
+---
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: sriov
+  name: sriov-ens1
   namespace: default
   annotations:
-    k8s.v1.cni.cncf.io/resourceName: intel.com/intel_sriov_netdevice
+    k8s.v1.cni.cncf.io/resourceName: intel.com/intel_sriov_netdevice_ens1
+spec:
+  config: |
+    {
+      "cniVersion": "0.2.0",
+      "type": "sriov",
+      "name": "sriov",
+      "master": "ens1",
+      "vlan": 222,
+      "ipam": {
+        "type": "host-local",
+        "subnet": "10.22.22.0/24",
+        "routes": [
+          { "dst": "0.0.0.0/0" }
+        ]
+      }
+    }
+
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: sriov-ens2
+  namespace: default
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: intel.com/intel_sriov_netdevice_ens2
 spec:
   config: |
     {
