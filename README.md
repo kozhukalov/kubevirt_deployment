@@ -1,3 +1,8 @@
+# Used versions
+- Kubevirt 0.28.0 (with minor customizations) https://github.com/kozhukalov/kubevirt/tree/branch-0.28.0
+- Multus CNI plugin 3.4.2 (see multus file in the current repo or https://github.com/intel/multus-cni/releases/tag/v3.4.2)
+- Sriov CNI plugin v2.3 (see sriov file in the current repo or https://github.com/intel/sriov-cni/releases/tag/v2.3)
+
 # Deploy kubevirt
 Deploy namespace, CRD, RBAC and kubevirt operator. 
 ```
